@@ -7,45 +7,44 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="left-panel">
-            <h1>Task Input</h1>
 
-            <label id="taskInputLabel" for="taskInput">
-                <h1>Enter Your Tasks</h1>
-                <p>Your tasks should be entered in the below given format</p>
-            </label>
+<div class="container">
 
-            <textarea id="taskInput" class="textarea" rows="15" placeholder='
-            [
-                {
-                    "id": 1,
-                    "title": "Task 1",
-                    "due_date": "yyyy-mm-dd",
-                    "estimated_hours": 2,
-                    "importance": 10,
-                    "dependencies": []
-                }, ...
-            ]'></textarea>
+    <!-- Left Section -->
+    <div class="left-panel">
+        <h2>Task Input</h2>
 
-            <div class="dropdown-container">
-                <label for="sortingStrategy">Sorting Strategy</label>
-                <select id="sortingStrategy" class="dropdown">
-                    <option value="default">Default (Priority Score)</option>
-                    <option value="fastest">Fastest Wins</option>
-                    <option value="deadline">Deadline Driven</option>
-                </select>
-            </div>
+        <label>Enter Tasks JSON:</label>
+        <textarea id="taskInput" placeholder='[
+            {
+                "id": 1,
+                "title": "Fix Bug",
+                "due_date": "2025-11-29",
+                "estimated_hours": 2,
+                "importance": 10,
+                "dependencies": []
+            }
+          ]'
+        >
+        </textarea>
 
-            <button class="btn">Analyze</button>
-        </div>
+        <label>Sorting Strategy:</label>
+        <select id="sortingStrategy">
+            <option value="default">Default (Priority Score)</option>
+            <option value="fastest">Fastest Wins</option>
+            <option value="deadline">Deadline Driven</option>
+        </select>
 
-        <div class="right-panel">
-            <h1>Task Results</h1>
-            <div id="resultDisplay" class="result-container"></div>
-        </div>
+        <button id="analyzeBtn">Analyze</button>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Right Section -->
+    <div class="right-panel">
+        <h2>Task Results</h2>
+        <div id="results"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

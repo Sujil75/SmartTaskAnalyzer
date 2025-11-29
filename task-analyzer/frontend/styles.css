@@ -1,80 +1,84 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-}
-
 body {
-    background-color: #fff;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
 }
 
 .container {
+    display: flex;
     height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0;
+}
+
+.left-panel, .right-panel {
+    padding: 20px;
+    width: 50%;
+    overflow-y: auto;
 }
 
 .left-panel {
-    box-sizing: border-box;
-    padding: 25px;
-    border: 1px solid #000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 50px;
+    background: white;
+    border-right: 3px solid #ddd;
 }
 
-.textarea {
-    box-sizing: border-box;
-    padding: 25px;
-    outline: none;
+textarea {
+    width: 100%;
+    height: 280px;
+    padding: 10px;
+    font-size: 14px;
+    border: 2px solid #aaa;
+    border-radius: 6px;
 }
 
-.dropdown-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 200px;
-}
-
-.dropdown {
-    outline: none;
-    height: 30px;
-}
-
-.btn {
-    align-self: center;
-    box-sizing: border-box;
-    padding: 8px;
-    padding-left: 12px;
-    padding-right: 12px;
-    background-color: skyblue;
-    color: #fff;
-    border: 0;
-    border-radius: 10px;
-}
-
-.btn:hover {
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
-    outline: none;
-    background-color: blue;
-    transform: background-color 0.9s ease-in-out;
+    font-size: 16px;
 }
 
-.right-panel {
-    box-sizing: border-box;
-    padding: 25px;
-    border: 1px solid #000;
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
+button:hover {
+    background: #45a049;
 }
 
-.result-container {
-    align-self: center;
-    height: 600px;
-    width: 500px;
-    flex-wrap: wrap;
-    overflow: auto;
+#results {
+    margin-top: 20px;
+}
+
+/* Task Cards */
+.task-card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-left: 7px solid;
+    border-radius: 6px;
+    box-shadow: 0 0 5px #ccc;
+}
+
+/* Priority Colors */
+.high {
+    border-color: #e74c3c;
+}
+
+.medium {
+    border-color: #f1c40f;
+}
+
+.low {
+    border-color: #2ecc71;
+}
+
+.task-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.explanation {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #666;
 }
