@@ -6,3 +6,6 @@ class Task(models.Model):
     estimated_hours = models.IntegerField()
     importance = models.IntegerField(default=5)
     dependencies = models.JSONField(default=list)
+
+    def __str__(self):
+        return self.title

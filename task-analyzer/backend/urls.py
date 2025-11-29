@@ -19,4 +19,7 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # Added to get Tasks app endpoints
+    path('api/tasks', include('tasks.urls')),
 ]

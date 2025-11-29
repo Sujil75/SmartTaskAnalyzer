@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Task Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h1>Task Input</h1>
+
+            <label id="taskInputLabel" for="taskInput">
+                <h1>Enter Your Tasks</h1>
+                <p>Your tasks should be entered in the below given format</p>
+            </label>
+
+            <textarea id="taskInput" class="textarea" rows="15" placeholder='
+            [
+                {
+                    "id": 1,
+                    "title": "Task 1",
+                    "due_date": "yyyy-mm-dd",
+                    "estimated_hours": 2,
+                    "importance": 10,
+                    "dependencies": []
+                }, ...
+            ]'></textarea>
+
+            <div class="dropdown-container">
+                <label for="sortingStrategy">Sorting Strategy</label>
+                <select id="sortingStrategy" class="dropdown">
+                    <option value="default">Default (Priority Score)</option>
+                    <option value="fastest">Fastest Wins</option>
+                    <option value="deadline">Deadline Driven</option>
+                </select>
+            </div>
+
+            <button class="btn">Analyze</button>
+        </div>
+
+        <div class="right-panel">
+            <h1>Task Results</h1>
+            <div id="resultDisplay" class="result-container"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

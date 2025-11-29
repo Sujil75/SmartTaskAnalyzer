@@ -1,5 +1,24 @@
 from datetime import datetime
 
+def has_circular_dependency(task, tasks, visited=None):
+    if not visited:
+        visited = set()
+    
+    task_id = task.get('id')
+    if not task_id:
+        return False
+    
+    visited.add(task_id)
+
+    for dependency_id in task.get('dependencies', []):
+        for t in tasks:
+            if t.get('id') == dependency_id:
+                if has_circular_dependency(t, tasks, visited):
+                    return True
+    
+    return False
+    
+
 def get_priority_score(task, tasks):
     # importance: 1-10
     score = 0
@@ -44,6 +63,9 @@ def get_priority_score(task, tasks):
                 count += 1
         score += min(count * 5, 10)
     
+    if has_circular_dependency(task, tasks):
+        score -= 10
+    
     return score
     
 
@@ -62,4 +84,4 @@ if __name__ == '__main__':
     sorted_tasks = sorted(tasks, key=lambda x:x['priority_score'], reverse=True)
     
     for t in sorted_tasks:
-        print(t["title"], t['priority_score'], "is", t['priority_score'])
+        print(t["title"], "is", t['priority_score'])

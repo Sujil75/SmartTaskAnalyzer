@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #fff;
+}
+
+.container {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+}
+
+.left-panel {
+    box-sizing: border-box;
+    padding: 25px;
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+}
+
+.textarea {
+    box-sizing: border-box;
+    padding: 25px;
+    outline: none;
+}
+
+.dropdown-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 200px;
+}
+
+.dropdown {
+    outline: none;
+    height: 30px;
+}
+
+.btn {
+    align-self: center;
+    box-sizing: border-box;
+    padding: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+    background-color: skyblue;
+    color: #fff;
+    border: 0;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    cursor: pointer;
+    outline: none;
+    background-color: blue;
+    transform: background-color 0.9s ease-in-out;
+}
+
+.right-panel {
+    box-sizing: border-box;
+    padding: 25px;
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.result-container {
+    align-self: center;
+    height: 600px;
+    width: 500px;
+    flex-wrap: wrap;
+    overflow: auto;
+}
