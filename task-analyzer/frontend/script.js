@@ -15,12 +15,11 @@ document.getElementById("analyzeBtn").addEventListener("click", async () => {
     try {
         const res = await fetch("http://127.0.0.1:8000/api/tasks/analyze/", {
             method: "POST",
-            headers: { 
-                "Content-Type": "application/json" 
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(tasks)
-        });
+        }) //.then(response => response.json()).then(console.log)
 
+        // console.log(res)
         const data = await res.json();
         const sorted = data["Sorted Tasks"];
 

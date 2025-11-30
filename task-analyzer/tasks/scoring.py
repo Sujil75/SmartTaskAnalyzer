@@ -22,7 +22,7 @@ def has_circular_dependency(task, tasks, visited=None):
 def get_priority_score(task, tasks):
     # importance: 1-10
     score = 0
-    importance = task["importance"]
+    importance = task.get('importance', 5) # for missing importance value
     score += importance * 5
 
     # urgency
@@ -32,7 +32,7 @@ def get_priority_score(task, tasks):
             due_date = datetime.strptime(due_date_str, "%Y-%m-%d")
             hours_left = (due_date - datetime.now()).total_seconds() // 3600
 
-            if hours_left < 0:
+            if hours_left < 0: # if task is due for many days
                 score += 40
             elif hours_left < 24:
                 score += 30
@@ -70,13 +70,13 @@ def get_priority_score(task, tasks):
     
 
 if __name__ == '__main__':
-    tasks = [
-        {"id": 1, "title": "Fix Bug", "due_date": "2025-11-29", "estimated_hours": 2, "importance": 10, "dependencies": []},
-        {"id": 2, "title": "Update Readme", "due_date": "2025-12-30", "estimated_hours": 1, "importance": 5, "dependencies": []},
-        {"id": 3, "title": "Big Project", "due_date": "2026-01-01", "estimated_hours": 15, "importance": 8, "dependencies": [1]},
-        {"id": 4, "title": "Task A", "due_date": "2025-12-15", "estimated_hours": 3, "importance": 7, "dependencies": []},
-        {"id": 5, "title": "Task B", "due_date": "2025-12-16", "estimated_hours": 2, "importance": 6, "dependencies": [4]},
-    ]
+    # tasks = [
+    #     {"id": 1, "title": "Fix Bug", "due_date": "2025-11-29", "estimated_hours": 2, "importance": 10, "dependencies": []},
+    #     {"id": 2, "title": "Update Readme", "due_date": "2025-12-30", "estimated_hours": 1, "importance": 5, "dependencies": []},
+    #     {"id": 3, "title": "Big Project", "due_date": "2026-01-01", "estimated_hours": 15, "importance": 8, "dependencies": [1]},
+    #     {"id": 4, "title": "Task A", "due_date": "2025-12-15", "estimated_hours": 3, "importance": 7, "dependencies": []},
+    #     {"id": 5, "title": "Task B", "due_date": "2025-12-16", "estimated_hours": 2, "importance": 6, "dependencies": [4]},
+    # ]
 
     for t in tasks:
         t['priority_score'] = get_priority_score(t, tasks)

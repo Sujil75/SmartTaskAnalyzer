@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from scoring import get_priority_score
+from tasks.scoring import get_priority_score
+import json
 
 from datetime import datetime
 
@@ -57,6 +58,9 @@ def build_explanation(task):
 # Analyze the task and provide a priority score
 @csrf_exempt
 def analyze_task(request):
+    # print(request.body, request.method)
+
+    # return JsonResponse({"message": "Analyse response is working"})
     if request.method != 'POST':
         return JsonResponse({'error': 'Invalid Request'}, status=405)
 
@@ -81,31 +85,31 @@ def analyze_task(request):
 
 
     # Suggest the tasks
-    @csrf_exempt
-    def suggest_tasks(request):
-        if request.method != 'GET':
-            return JsonResponse({'error': 'Invalid Request'}, status=405)
+@csrf_exempt
+def suggest_tasks(request):
+    if request.method != 'GET':
+        return JsonResponse({'error': 'Invalid Request'}, status=405)
 
-        try:
-            body = request.body.decode('utf-8')
-            tasks = json.loads(body) if body else []
-        
-        except:
-            return JsonResponse({'error': 'Invalid JSON Data'}, status=400)
-        
-        if not isinstance(tasks, list):
-            return JsonResponse({'error': 'Tasks should be in a list'}, status=400)
+    try:
+        body = request.body.decode('utf-8')
+        tasks = json.loads(body) if body else []
+    
+    except:
+        return JsonResponse({'error': 'Invalid JSON Data'}, status=400)
+    
+    if not isinstance(tasks, list):
+        return JsonResponse({'error': 'Tasks should be in a list'}, status=400)
 
-        
-        # find score
-        for t in tasks:
-            t['priority_score'] = get_priority_score(t, tasks)
-            t['explanation'] = build_explanation(t)
+    
+    # find score
+    for t in tasks:
+        t['priority_score'] = get_priority_score(t, tasks)
+        t['explanation'] = build_explanation(t)
 
-        # Top 3 tasks for today
-        top_three = sorted(tasks, key=lambda x:x['priority_score'], reverse=True)[:-3]
+    # Top 3 tasks for today
+    top_three = sorted(tasks, key=lambda x:x['priority_score'], reverse=True)[:-3]
 
-        return JsonResponse({
-            "suggested_tasks": top_three,
-            "message": "These are the top 3 tasks picked for today"
-        })
+    return JsonResponse({
+        "suggested_tasks": top_three,
+        "message": "These are the top 3 tasks picked for today"
+    })
